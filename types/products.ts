@@ -16,4 +16,8 @@ import { productSchema } from "../schemas/productSchema.js"
 type ProductDTO = z.infer<typeof productSchema>
 
 // we are adding an ID because, when we validate the data we don't care about the id. why?? because IDs are handled by the database
-export type Product = ProductDTO & { id: number }
+export type Product = ProductDTO & { _id: string }
+
+export type Category = {
+  name: string
+}

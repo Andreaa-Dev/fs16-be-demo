@@ -7,31 +7,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import mongoose from "mongoose";
-import ProductRepo from "../models/Product.js";
+import CategoryRepo from "../models/Category.js";
 function findAll() {
     return __awaiter(this, void 0, void 0, function* () {
-        const products = yield ProductRepo.find()
-            .populate("category")
-            .populate("sizes");
-        return products;
+        const categories = yield CategoryRepo.find().exec();
+        return categories;
     });
 }
-function findOne(productId) {
+function createOne(category) {
     return __awaiter(this, void 0, void 0, function* () {
-        const id = new mongoose.Types.ObjectId(productId);
-        const product = yield ProductRepo.findById(id);
-        return product;
-    });
-}
-function createOne(product) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const newProduct = new ProductRepo(product);
-        return yield newProduct.save();
+        const newCategory = new CategoryRepo(category);
+        return yield newCategory.save();
     });
 }
 export default {
-    findOne,
     findAll,
     createOne,
 };

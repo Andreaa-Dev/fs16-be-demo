@@ -4,9 +4,14 @@ import "dotenv/config"
 
 import itemsRoute from "./routes/itemsRoute.js"
 import productsRoute from "./routes/productsRoute.js"
+import categoryRoute from "./routes/categoryRoute.js"
+import Size from "./models/Size.js"
+import Order from "./models/Order.js"
 import { loggingMiddleware } from "./middlewares/logging.js"
 import { apiErrorHandler } from "./middlewares/error.js"
 import { routeNotFound } from "./middlewares/routeNotFound.js"
+import { Product } from "./types/products.js"
+import OrderItem from "./models/OrderItem.js"
 
 const PORT = 8080
 const app = express()
@@ -23,6 +28,53 @@ app.get("/hello", loggingMiddleware, (_, res) => {
 
 app.use("/api/v1/items", itemsRoute)
 app.use("/api/v1/products", productsRoute)
+app.use("/api/v1/categories", categoryRoute)
+
+app.post("/api/v1/sizes", (req, res) => {
+  const size = new Size(req.body)
+  size.save()
+  res.status(201).json({ message: "size is created", size })
+})
+
+// Admin getting orders
+app.get("/api/v1/orders", async (req, res) => {
+  const orderItems = await OrderItem.find()
+    .populate("productId")
+    .populate("orderId")
+
+  res.status(201).json({ orderItems })
+})
+
+app.post("/api/v1/checkout", async (req, res) => {
+  const {
+    name,
+    products,
+  }: {
+    name: string
+    products: {
+      id: string
+      quantity: number
+    }[]
+  } = req.body
+  const order = new Order({ name })
+  await order.save()
+
+  const orderId = order._id
+  console.log("orderId:", orderId)
+
+  await Promise.all(
+    products.map((product) => {
+      const orderItem = new OrderItem({
+        orderId,
+        productId: product.id,
+        quantity: product.quantity,
+      })
+      orderItem.save()
+    })
+  )
+
+  res.status(201).json({ message: "order is created", order })
+})
 
 app.use(apiErrorHandler)
 app.use(routeNotFound)

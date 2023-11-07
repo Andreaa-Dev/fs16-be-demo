@@ -3,7 +3,9 @@ import ProductRepo from "../models/Product.js"
 import { Product } from "../types/products.js"
 
 async function findAll() {
-  const products = await ProductRepo.find().exec()
+  const products = await ProductRepo.find()
+    .populate("category")
+    .populate("sizes")
 
   return products
 }
