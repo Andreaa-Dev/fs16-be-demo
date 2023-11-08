@@ -30,12 +30,21 @@ app.use("/api/v1/items", itemsRoute)
 app.use("/api/v1/products", productsRoute)
 app.use("/api/v1/categories", categoryRoute)
 
+// TODO: MOVE ALL THE BELOW HANLDERS TO THEIR CORRESPONDING FILE
 app.post("/api/v1/sizes", (req, res) => {
   const size = new Size(req.body)
   size.save()
   res.status(201).json({ message: "size is created", size })
 })
 
+// TODO: talk about accessing specific user orders
+app.get("/api/v1/orders/:userId", async (req, res) => {
+  const orderItems = await OrderItem.find()
+    .populate("productId")
+    .populate("orderId")
+
+  res.status(201).json({ orderItems })
+})
 // Admin getting orders
 app.get("/api/v1/orders", async (req, res) => {
   const orderItems = await OrderItem.find()

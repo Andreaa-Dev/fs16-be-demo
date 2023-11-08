@@ -28,9 +28,22 @@ export function findOneProduct(req, res, next) {
 }
 export function createOneProduct(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const newProduct = req.body;
-        const product = yield ProductsService.createOne(newProduct);
-        res.status(201).json({ product });
+        try {
+            const newProduct = req.body;
+            const product = yield ProductsService.createOne(newProduct);
+            res.status(201).json({ product });
+        }
+        catch (error) {
+            if (error.name === "ValidationError") {
+                const validationErrors = {};
+                for (const field in error.errors) {
+                    validationErrors[field] = error.errors[field].message;
+                    res.status(500).json({ erros: validationErrors });
+                    return;
+                }
+            }
+            res.status(500).json({ msg: "something went wrong" });
+        }
     });
 }
 export default {

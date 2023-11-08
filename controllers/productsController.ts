@@ -27,10 +27,24 @@ export async function findOneProduct(
 }
 
 export async function createOneProduct(req: Request, res: Response) {
-  const newProduct = req.body
-  const product = await ProductsService.createOne(newProduct)
+  try {
+    const newProduct = req.body
+    const product = await ProductsService.createOne(newProduct)
 
-  res.status(201).json({ product })
+    res.status(201).json({ product })
+  } catch (error) {
+    if (error.name === "ValidationError") {
+      const validationErrors = {}
+
+      for (const field in error.errors) {
+        validationErrors[field] = error.errors[field].message
+
+        res.status(500).json({ erros: validationErrors })
+        return
+      }
+    }
+    res.status(500).json({ msg: "something went wrong" })
+  }
 }
 
 export default {

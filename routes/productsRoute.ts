@@ -9,4 +9,6 @@ router.get("/", ProductController.findAllProduct)
 router.get("/:productId", ProductController.findOneProduct)
 router.post("/", validateProduct, ProductController.createOneProduct)
 
+router.delete("/:productId", ProductController.findOneProduct)
+
 export default router

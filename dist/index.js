@@ -31,11 +31,19 @@ app.get("/hello", loggingMiddleware, (_, res) => {
 app.use("/api/v1/items", itemsRoute);
 app.use("/api/v1/products", productsRoute);
 app.use("/api/v1/categories", categoryRoute);
+// TODO: MOVE ALL THE BELOW HANLDERS TO THEIR CORRESPONDING FILE
 app.post("/api/v1/sizes", (req, res) => {
     const size = new Size(req.body);
     size.save();
     res.status(201).json({ message: "size is created", size });
 });
+// TODO: talk about accessing specific user orders
+app.get("/api/v1/orders/:userId", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const orderItems = yield OrderItem.find()
+        .populate("productId")
+        .populate("orderId");
+    res.status(201).json({ orderItems });
+}));
 // Admin getting orders
 app.get("/api/v1/orders", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orderItems = yield OrderItem.find()

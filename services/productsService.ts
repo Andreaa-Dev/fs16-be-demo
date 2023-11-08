@@ -19,6 +19,7 @@ async function findOne(productId: string) {
 
 async function createOne(product: Product) {
   const newProduct = new ProductRepo(product)
+
   return await newProduct.save()
 }
 
