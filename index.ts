@@ -1,17 +1,20 @@
-import express from "express"
-import mongoose from "mongoose"
+import express, { NextFunction, Response } from "express"
+import jwt from "jsonwebtoken"
+import mongoose, { ObjectId } from "mongoose"
 import "dotenv/config"
 
 import itemsRoute from "./routes/itemsRoute.js"
 import productsRoute from "./routes/productsRoute.js"
 import categoryRoute from "./routes/categoryRoute.js"
+import userRoute from "./routes/userRoute.js"
 import Size from "./models/Size.js"
 import Order from "./models/Order.js"
 import { loggingMiddleware } from "./middlewares/logging.js"
 import { apiErrorHandler } from "./middlewares/error.js"
 import { routeNotFound } from "./middlewares/routeNotFound.js"
-import { Product } from "./types/products.js"
 import OrderItem from "./models/OrderItem.js"
+import ProductService from "./services/productsService.js"
+import { checkAuth } from "./middlewares/checkAuth.js"
 
 const PORT = 8080
 const app = express()
@@ -29,6 +32,11 @@ app.get("/hello", loggingMiddleware, (_, res) => {
 app.use("/api/v1/items", itemsRoute)
 app.use("/api/v1/products", productsRoute)
 app.use("/api/v1/categories", categoryRoute)
+app.use("/api/v1/users", userRoute)
+
+app.get("/api/v1/protected", checkAuth, (req, res) => {
+  res.json({ items: [1, 2, 3, 4, 5] })
+})
 
 // TODO: MOVE ALL THE BELOW HANLDERS TO THEIR CORRESPONDING FILE
 app.post("/api/v1/sizes", (req, res) => {
@@ -71,6 +79,7 @@ app.post("/api/v1/checkout", async (req, res) => {
   const orderId = order._id
   console.log("orderId:", orderId)
 
+  const orderItems: { _id: ObjectId; quantity: number }[] = []
   await Promise.all(
     products.map((product) => {
       const orderItem = new OrderItem({
@@ -79,8 +88,13 @@ app.post("/api/v1/checkout", async (req, res) => {
         quantity: product.quantity,
       })
       orderItem.save()
+      orderItems.push({ _id: product.id, quantity: orderItem.quantity })
     })
   )
+
+  console.log("orderItems:", orderItems)
+  const sum = await ProductService.getTotalPrice(orderItems)
+  console.log("sum:", sum)
 
   res.status(201).json({ message: "order is created", order })
 })

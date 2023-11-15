@@ -16,6 +16,7 @@ const ProductSchema = new Schema({
       ref: "Size",
     },
   ],
+  price: Number,
 })
 
 export default mongoose.model("Product", ProductSchema)

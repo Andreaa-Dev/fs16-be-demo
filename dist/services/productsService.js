@@ -30,8 +30,23 @@ function createOne(product) {
         return yield newProduct.save();
     });
 }
+function getTotalPrice(orderItemsInput) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const inputIds = orderItemsInput.map((item) => item._id);
+        const products = yield ProductRepo.find({ _id: inputIds });
+        const sum = products.reduce((acc, product) => {
+            const inputTargetItem = orderItemsInput.find((input) => product._id.equals(input._id));
+            if (inputTargetItem) {
+                return acc + inputTargetItem.quantity * product.price;
+            }
+            return acc;
+        }, 0);
+        return sum;
+    });
+}
 export default {
     findOne,
     findAll,
     createOne,
+    getTotalPrice,
 };

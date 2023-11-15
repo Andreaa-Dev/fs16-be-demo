@@ -13,12 +13,15 @@ import "dotenv/config";
 import itemsRoute from "./routes/itemsRoute.js";
 import productsRoute from "./routes/productsRoute.js";
 import categoryRoute from "./routes/categoryRoute.js";
+import userRoute from "./routes/userRoute.js";
 import Size from "./models/Size.js";
 import Order from "./models/Order.js";
 import { loggingMiddleware } from "./middlewares/logging.js";
 import { apiErrorHandler } from "./middlewares/error.js";
 import { routeNotFound } from "./middlewares/routeNotFound.js";
 import OrderItem from "./models/OrderItem.js";
+import ProductService from "./services/productsService.js";
+import { checkAuth } from "./middlewares/checkAuth.js";
 const PORT = 8080;
 const app = express();
 app.use(express.json());
@@ -31,6 +34,10 @@ app.get("/hello", loggingMiddleware, (_, res) => {
 app.use("/api/v1/items", itemsRoute);
 app.use("/api/v1/products", productsRoute);
 app.use("/api/v1/categories", categoryRoute);
+app.use("/api/v1/users", userRoute);
+app.get("/api/v1/protected", checkAuth, (req, res) => {
+    res.json({ items: [1, 2, 3, 4, 5] });
+});
 // TODO: MOVE ALL THE BELOW HANLDERS TO THEIR CORRESPONDING FILE
 app.post("/api/v1/sizes", (req, res) => {
     const size = new Size(req.body);
@@ -57,6 +64,7 @@ app.post("/api/v1/checkout", (req, res) => __awaiter(void 0, void 0, void 0, fun
     yield order.save();
     const orderId = order._id;
     console.log("orderId:", orderId);
+    const orderItems = [];
     yield Promise.all(products.map((product) => {
         const orderItem = new OrderItem({
             orderId,
@@ -64,7 +72,11 @@ app.post("/api/v1/checkout", (req, res) => __awaiter(void 0, void 0, void 0, fun
             quantity: product.quantity,
         });
         orderItem.save();
+        orderItems.push({ _id: product.id, quantity: orderItem.quantity });
     }));
+    console.log("orderItems:", orderItems);
+    const sum = yield ProductService.getTotalPrice(orderItems);
+    console.log("sum:", sum);
     res.status(201).json({ message: "order is created", order });
 }));
 app.use(apiErrorHandler);
