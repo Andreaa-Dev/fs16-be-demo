@@ -59,6 +59,8 @@ export function login(email, password) {
             userId: user.id,
             email: user.email,
             role: user.role,
+            // TODO: GET THIS FROM YOUR DB
+            permissions: ["USERS_DELETE_ONE"],
         };
         const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
             expiresIn: "1h",
@@ -70,8 +72,26 @@ export function login(email, password) {
         };
     });
 }
+function findAll() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield UserRepo.find();
+    });
+}
+function deleteAll() {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield UserRepo.deleteMany();
+    });
+}
+function deleteOne(userId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        return yield UserRepo.deleteOne({ _id: userId });
+    });
+}
 export default {
     createOne,
     login,
     findOneByEmail,
+    deleteOne,
+    deleteAll,
+    findAll,
 };

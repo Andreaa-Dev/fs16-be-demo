@@ -65,6 +65,8 @@ export async function login(email: string, password: string) {
     userId: user.id,
     email: user.email,
     role: user.role,
+    // TODO: GET THIS FROM YOUR DB
+    permissions: ["USERS_DELETE_ONE"],
   }
   const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
     expiresIn: "1h",
@@ -76,8 +78,22 @@ export async function login(email: string, password: string) {
     accessToken,
   }
 }
+
+async function findAll() {
+  return await UserRepo.find()
+}
+
+async function deleteAll() {
+  return await UserRepo.deleteMany()
+}
+async function deleteOne(userId: string) {
+  return await UserRepo.deleteOne({ _id: userId })
+}
 export default {
   createOne,
   login,
   findOneByEmail,
+  deleteOne,
+  deleteAll,
+  findAll,
 }

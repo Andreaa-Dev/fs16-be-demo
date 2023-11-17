@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import UserSevice from "../services/userService.js";
-import UserRepo from "../models/User.js";
 function signup(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { name, email, password } = req.body;
@@ -40,10 +39,27 @@ function login(req, res) {
 }
 function deleteAll(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        yield UserRepo.deleteMany();
+        yield UserSevice.deleteAll();
         res.status(201).json({
             message: "users are deleted",
         });
     });
 }
-export default { signup, deleteAll, login };
+function deleteOne(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userId = req.params.userId;
+        // await UserSevice.deleteOne(userId)
+        res.status(201).json({
+            message: `user ${userId} is deleted`,
+        });
+    });
+}
+function findAll(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const users = yield UserSevice.findAll();
+        res.status(201).json({
+            users,
+        });
+    });
+}
+export default { signup, deleteAll, deleteOne, login, findAll };

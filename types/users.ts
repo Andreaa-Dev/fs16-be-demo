@@ -1,21 +1,23 @@
+import { Request } from "express"
 import { JwtPayload } from "jsonwebtoken"
-import { Document } from "mongoose"
+
+import { ROLE } from "../common/auth.js"
 
 export interface DecodedUser extends JwtPayload {
   userId: string
   email: string
+  role: Role
 }
 
-export const role = {
-  USER: "USER",
-  ADMIN: "ADMIN",
-} as const
-
-export type Role = keyof typeof role
+export type Role = keyof typeof ROLE
 
 export type User = {
   name: string
   email: string
   password: string
   role: Role
+}
+
+export interface WithAuthRequest extends Request {
+  decodedUser?: DecodedUser
 }

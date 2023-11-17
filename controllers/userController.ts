@@ -36,11 +36,25 @@ async function login(req: Request, res: Response) {
 
   res.json({ message: login.message, accessToken: login.accessToken })
 }
+
 async function deleteAll(req: Request, res: Response) {
-  await UserRepo.deleteMany()
+  await UserSevice.deleteAll()
   res.status(201).json({
     message: "users are deleted",
   })
 }
+async function deleteOne(req: Request, res: Response) {
+  const userId = req.params.userId
+  // await UserSevice.deleteOne(userId)
+  res.status(201).json({
+    message: `user ${userId} is deleted`,
+  })
+}
+async function findAll(req: Request, res: Response) {
+  const users = await UserSevice.findAll()
+  res.status(201).json({
+    users,
+  })
+}
 
-export default { signup, deleteAll, login }
+export default { signup, deleteAll, deleteOne, login, findAll }
