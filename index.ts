@@ -27,7 +27,7 @@ passport.use(loginWithGoogle())
 
 // TODO: Validate .env using Zod
 const mongoURL = process.env.DB_URL as string
-mongoose.connect(mongoURL).then(() => console.log("Connected!"))
+// mongoose.connect(mongoURL).then(() => console.log("Connected!"))
 
 app.get("/hello", loggingMiddleware, (_, res) => {
   res.json({ msg: "hello, from Express.js!" })
@@ -57,6 +57,7 @@ app.get("/api/v1/orders/:userId", async (req, res) => {
 
   res.status(201).json({ orderItems })
 })
+
 // Admin getting orders
 app.get("/api/v1/orders", async (req, res) => {
   const orderItems = await OrderItem.find()
@@ -66,42 +67,42 @@ app.get("/api/v1/orders", async (req, res) => {
   res.status(201).json({ orderItems })
 })
 
-app.post("/api/v1/checkout", async (req, res) => {
-  const {
-    name,
-    products,
-  }: {
-    name: string
-    products: {
-      id: string
-      quantity: number
-    }[]
-  } = req.body
-  const order = new Order({ name })
-  await order.save()
+// app.post("/api/v1/checkout", async (req, res) => {
+//   const {
+//     name,
+//     products,
+//   }: {
+//     name: string
+//     products: {
+//       id: string
+//       quantity: number
+//     }[]
+//   } = req.body
+//   const order = new Order({ name })
+//   await order.save()
 
-  const orderId = order._id
-  console.log("orderId:", orderId)
+//   const orderId = order._id
+//   console.log("orderId:", orderId)
 
-  const orderItems: { _id: ObjectId; quantity: number }[] = []
-  await Promise.all(
-    products.map((product) => {
-      const orderItem = new OrderItem({
-        orderId,
-        productId: product.id,
-        quantity: product.quantity,
-      })
-      orderItem.save()
-      orderItems.push({ _id: product.id, quantity: orderItem.quantity })
-    })
-  )
+//   const orderItems: { _id: ObjectId; quantity: number }[] = []
+//   await Promise.all(
+//     products.map((product) => {
+//       const orderItem = new OrderItem({
+//         orderId,
+//         productId: product.id,
+//         quantity: product.quantity,
+//       })
+//       orderItem.save()
+//       orderItems.push({ _id: product.id, quantity: orderItem.quantity })
+//     })
+//   )
 
-  console.log("orderItems:", orderItems)
-  const sum = await ProductService.getTotalPrice(orderItems)
-  console.log("sum:", sum)
+//   console.log("orderItems:", orderItems)
+//   const sum = await ProductService.getTotalPrice(orderItems)
+//   console.log("sum:", sum)
 
-  res.status(201).json({ message: "order is created", order })
-})
+//   res.status(201).json({ message: "order is created", order })
+// })
 
 app.use(apiErrorHandler)
 app.use(routeNotFound)
@@ -109,3 +110,5 @@ app.use(routeNotFound)
 app.listen(PORT, () => {
   console.log(`👀 app is running at localhost:${PORT}`)
 })
+
+export default app

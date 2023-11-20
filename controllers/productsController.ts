@@ -32,16 +32,16 @@ export async function createOneProduct(req: Request, res: Response) {
 
     res.status(201).json({ product })
   } catch (error) {
-    if (error.name === "ValidationError") {
-      const validationErrors = {}
+    // if (error.name === "ValidationError") {
+    const validationErrors = {}
 
-      for (const field in error.errors) {
-        validationErrors[field] = error.errors[field].message
+    // for (const field in error.errors) {
+    //   validationErrors[field] = error.errors[field].message
 
-        res.status(500).json({ erros: validationErrors })
-        return
-      }
-    }
+    //   res.status(500).json({ erros: validationErrors })
+    //   return
+    // }
+    // }
     res.status(500).json({ msg: "something went wrong" })
   }
 }

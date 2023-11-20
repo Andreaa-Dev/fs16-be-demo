@@ -51,7 +51,7 @@ export async function login(email: string, password: string) {
   }
 
   const hashedPassword = user.password
-  const isValid = bcrypt.compareSync(password, hashedPassword)
+  const isValid = bcrypt.compareSync(password, hashedPassword as string)
 
   if (!isValid) {
     return {

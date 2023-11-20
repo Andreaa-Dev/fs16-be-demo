@@ -37,7 +37,7 @@ async function getTotalPrice(
       product._id.equals(input._id)
     )
 
-    if (inputTargetItem) {
+    if (inputTargetItem && product.price) {
       return acc + inputTargetItem.quantity * product.price
     }
     return acc

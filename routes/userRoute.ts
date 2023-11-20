@@ -16,7 +16,7 @@ router.post("/login", UserController.login)
 router.post(
   "/login-google",
   passport.authenticate("google-id-token", { session: false }),
-  (req: WithUserRequest, res) => {
+  (req: any, res) => {
     const user = req.user
 
     if (user) {

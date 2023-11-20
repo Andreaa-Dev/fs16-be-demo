@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1700476314015" clover="3.2.0">
+  <project timestamp="1700476314015" name="All files">
+    <metrics statements="78" coveredstatements="71" conditionals="43" coveredconditionals="39" methods="34" coveredmethods="28" elements="155" coveredelements="138" complexity="0" loc="78" ncloc="78" packages="6" files="6" classes="6"/>
+    <package name="dist.models">
+      <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="6" methods="1" coveredmethods="1"/>
+      <file name="Category.js" path="/Users/yazan/Documents/demos/fs16-backend/dist/models/Category.js">
+        <metrics statements="7" coveredstatements="7" conditionals="7" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="3" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="dist.services">
+      <metrics statements="18" coveredstatements="14" conditionals="18" coveredconditionals="16" methods="12" coveredmethods="8"/>
+      <file name="categoryService.js" path="/Users/yazan/Documents/demos/fs16-backend/dist/services/categoryService.js">
+        <metrics statements="18" coveredstatements="14" conditionals="18" coveredconditionals="16" methods="12" coveredmethods="8"/>
+        <line num="2" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="3" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="4" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="12" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="dist.test">
+      <metrics statements="27" coveredstatements="26" conditionals="18" coveredconditionals="17" methods="14" coveredmethods="13"/>
+      <file name="db-helper.js" path="/Users/yazan/Documents/demos/fs16-backend/dist/test/db-helper.js">
+        <metrics statements="27" coveredstatements="26" conditionals="18" coveredconditionals="17" methods="14" coveredmethods="13"/>
+        <line num="2" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="3" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="4" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="7" count="9" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="cond" truecount="3" falsecount="0"/>
+        <line num="12" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="models">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Category.ts" path="/Users/yazan/Documents/demos/fs16-backend/models/Category.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="services">
+      <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="categoryService.ts" path="/Users/yazan/Documents/demos/fs16-backend/services/categoryService.ts">
+        <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="test">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="db-helper.ts" path="/Users/yazan/Documents/demos/fs16-backend/test/db-helper.ts">
+        <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
