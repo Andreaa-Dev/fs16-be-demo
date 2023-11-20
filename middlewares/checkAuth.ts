@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
 import { NextFunction, Response } from "express"
 
-import { ApiError } from "../errors/ApiError.js"
-import { DecodedUser, WithAuthRequest } from "../types/users.js"
+import { ApiError } from "../errors/ApiError"
+import { DecodedUser, WithAuthRequest } from "../types/users"
 
 export function checkAuth(
   req: WithAuthRequest,

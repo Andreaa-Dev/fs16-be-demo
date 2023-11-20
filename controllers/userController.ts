@@ -2,8 +2,8 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import { Request, Response } from "express"
 
-import UserSevice from "../services/userService.js"
-import UserRepo from "../models/User.js"
+import UserSevice from "../services/userService"
+import UserRepo from "../models/User"
 
 async function signup(req: Request, res: Response) {
   const { name, email, password } = req.body

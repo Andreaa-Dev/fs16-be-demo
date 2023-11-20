@@ -1,8 +1,8 @@
 import GoogleTokenStrategy from "passport-google-id-token"
 import "dotenv/config"
 
-import UserRepo from "../models/User.js"
-import { ApiError } from "../errors/ApiError.js"
+import UserRepo from "../models/User"
+import { ApiError } from "../errors/ApiError"
 
 const GOOGLE_CLIENT_ID =
   "601029235840-7g4tl5ibpel48pbml0egcb7c511pmlge.apps.googleusercontent.com"

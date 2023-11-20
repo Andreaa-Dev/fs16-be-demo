@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express"
-import { Role, WithAuthRequest } from "../types/users.js"
-import { ApiError } from "../errors/ApiError.js"
+import { Role, WithAuthRequest } from "../types/users"
+import { ApiError } from "../errors/ApiError"
 
 export function checkRoles(...roles: Role[]) {
   return (req: WithAuthRequest, res: Response, next: NextFunction) => {

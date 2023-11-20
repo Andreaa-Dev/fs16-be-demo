@@ -1,7 +1,6 @@
-import mongoose, { ObjectId } from "mongoose"
-import ProductRepo from "../models/Product.js"
-import { Product } from "../types/products.js"
-import { ObjectId } from "mongoose"
+import mongoose from "mongoose"
+import ProductRepo from "../models/Product"
+import { Product } from "../types/products"
 
 async function findAll() {
   const products = await ProductRepo.find()

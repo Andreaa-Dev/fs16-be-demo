@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { z } from "zod"
 
-import { requestSchema } from "../schemas/productSchema.js"
+import { requestSchema } from "../schemas/productSchema"
 
 export async function validateProduct(
   req: Request,

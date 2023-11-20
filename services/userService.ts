@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"
 
-import UserRepo from "../models/User.js"
+import UserRepo from "../models/User"
 import jwt from "jsonwebtoken"
 
 export async function findOneByEmail(email: string) {

@@ -1,7 +1,7 @@
 import { Request } from "express"
 import { JwtPayload } from "jsonwebtoken"
 
-import { ROLE } from "../common/auth.js"
+import { ROLE } from "../common/auth"
 
 export interface DecodedUser extends JwtPayload {
   userId: string

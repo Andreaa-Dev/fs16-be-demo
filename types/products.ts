@@ -10,7 +10,7 @@
 
 import { z } from "zod"
 
-import { productSchema } from "../schemas/productSchema.js"
+import { productSchema } from "../schemas/productSchema"
 
 // to get the type FROM the ZOD validation
 type ProductDTO = z.infer<typeof productSchema>

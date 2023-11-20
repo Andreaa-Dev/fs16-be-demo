@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 
-import CategoryService from "../services/categoryService.js"
+import CategoryService from "../services/categoryService"
 
 export async function findAllCategory(_: Request, res: Response) {
   const categories = await CategoryService.findAll()

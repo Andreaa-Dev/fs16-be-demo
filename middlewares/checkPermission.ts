@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express"
-import { Role, WithAuthRequest } from "../types/users.js"
-import { ApiError } from "../errors/ApiError.js"
-import { Permission } from "../common/auth.js"
+import { Role, WithAuthRequest } from "../types/users"
+import { ApiError } from "../errors/ApiError"
+import { Permission } from "../common/auth"
 
 export function checkPermission(...permissions: Permission[]) {
   return (req: WithAuthRequest, res: Response, next: NextFunction) => {

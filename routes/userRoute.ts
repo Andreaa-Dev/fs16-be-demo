@@ -1,12 +1,12 @@
 import express from "express"
 import passport from "passport"
 
-import UserController from "../controllers/userController.js"
-import { checkAuth } from "../middlewares/checkAuth.js"
-import { checkRoles } from "../middlewares/checkRoles.js"
-import { ROLE } from "../common/auth.js"
-import { checkPermission } from "../middlewares/checkPermission.js"
-import { WithUserRequest } from "../types/users.js"
+import UserController from "../controllers/userController"
+import { checkAuth } from "../middlewares/checkAuth"
+import { checkRoles } from "../middlewares/checkRoles"
+import { ROLE } from "../common/auth"
+import { checkPermission } from "../middlewares/checkPermission"
+import { WithUserRequest } from "../types/users"
 import jwt from "jsonwebtoken"
 
 const router = express.Router()
