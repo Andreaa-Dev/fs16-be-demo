@@ -1,5 +1,4 @@
 import express, { NextFunction, Response } from "express"
-import jwt from "jsonwebtoken"
 import mongoose, { ObjectId } from "mongoose"
 import "dotenv/config"
 
@@ -15,11 +14,16 @@ import { routeNotFound } from "./middlewares/routeNotFound.js"
 import OrderItem from "./models/OrderItem.js"
 import ProductService from "./services/productsService.js"
 import { checkAuth } from "./middlewares/checkAuth.js"
+import { loginWithGoogle } from "./middlewares/loginWithGoogle.js"
+import passport from "passport"
 
 const PORT = 8080
 const app = express()
 
 app.use(express.json())
+
+app.use(passport.initialize())
+passport.use(loginWithGoogle())
 
 // TODO: Validate .env using Zod
 const mongoURL = process.env.DB_URL as string

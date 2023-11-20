@@ -8,6 +8,7 @@ export function apiErrorHandler(
   res: Response,
   _: NextFunction
 ) {
+  console.log("error:", error)
   if (error instanceof ApiError) {
     res.status(error.code).json({ msg: error.message })
     return

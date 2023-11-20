@@ -12,6 +12,7 @@ export interface DecodedUser extends JwtPayload {
 export type Role = keyof typeof ROLE
 
 export type User = {
+  _id: string
   name: string
   email: string
   password: string
@@ -20,4 +21,7 @@ export type User = {
 
 export interface WithAuthRequest extends Request {
   decodedUser?: DecodedUser
+}
+export interface WithUserRequest extends Request {
+  user?: User
 }
