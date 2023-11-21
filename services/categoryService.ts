@@ -1,18 +1,18 @@
-import CategoryRepo from "../models/Category"
-import { Category } from "../types/products"
+import CategoryRepo from "../models/Category";
+import { Category } from "../types/products";
 
 async function findAll() {
-  const categories = await CategoryRepo.find().exec()
+  const categories = await CategoryRepo.find().exec();
 
-  return categories
+  return categories;
 }
 
 async function createOne(category: Category) {
-  const newCategory = new CategoryRepo(category)
-  return await newCategory.save()
+  const newCategory = new CategoryRepo(category);
+  return await newCategory.save();
 }
 
 export default {
   findAll,
   createOne,
-}
+};
