@@ -4,9 +4,6 @@ import "dotenv/config";
 import UserRepo from "../models/User";
 import { ApiError } from "../errors/ApiError";
 
-const GOOGLE_CLIENT_ID =
-  "601029235840-7g4tl5ibpel48pbml0egcb7c511pmlge.apps.googleusercontent.com";
-
 export const loginWithGoogle = () => {
   return new GoogleTokenStrategy(
     {
@@ -21,6 +18,9 @@ export const loginWithGoogle = () => {
           const newUser = new UserRepo({
             name: parsedToken.payload.name,
             email,
+            isLogInWithGoogle: true,
+            // default password
+            // password: random generated password - (send my email)
           });
 
           await newUser.save();

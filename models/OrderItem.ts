@@ -1,17 +1,27 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const OrdeItemSchema = new Schema({
-  orderId: {
-    type: Schema.Types.ObjectId,
-    ref: "Order",
-  },
+// productOrder
+// const OrderItemSchema = new Schema({
+//   orderId: {
+//     type: Schema.Types.ObjectId,
+//     ref: "Order",
+//   },
+//   productId: {
+//     type: Schema.Types.ObjectId,
+//     ref: "Product",
+//   },
+//   quantity: Number,
+// });
+
+// new schema
+const OrderItemSchema = new Schema({
   productId: {
     type: Schema.Types.ObjectId,
     ref: "Product",
   },
   quantity: Number,
-})
+});
 
-export default mongoose.model("OrderItem", OrdeItemSchema)
+export default mongoose.model("OrderItem", OrderItemSchema);

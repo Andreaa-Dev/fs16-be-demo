@@ -26,17 +26,49 @@ async function signup(req: Request, res: Response) {
 
 async function login(req: Request, res: Response) {
   const { password, email } = req.body;
+  const foundUser = await UserService.findOneByEmail(email);
+  if (!foundUser) {
+    return res
+      .status(400)
+      .json({ message: `Cant find user with email: ${email}` });
+  }
+  if (foundUser.isLogInWithGoogle) {
+    return res.status(400).json({ message: "please log in with Google" });
+  }
+
   const login = await UserService.login(email, password);
 
   if (!login.status) {
     // TODO throw API error
-    res.status(400).json({ accessToken: null, message: "Bad credentials" });
-    return;
+    return res.status(400).json({ message: "Bad credentials" });
   }
 
-  res.json({ message: login.message, accessToken: login.accessToken });
+  res.json({
+    message: login.message,
+    accessToken: login.accessToken,
+    user: login.user,
+  });
 }
 
+async function logInWithGoogle(req: any, res: Response) {
+  const user = req.user;
+  if (user) {
+    const payload = {
+      userId: user._id,
+      email: user.email,
+      role: user.role,
+      // TODO: GET THIS FROM YOUR DB
+      permissions: ["USERS_DELETE_ONE"],
+    };
+    const accessToken = jwt.sign(payload, process.env.TOKEN_SECRET as string, {
+      expiresIn: "1h",
+    });
+    res.json({
+      accessToken,
+      user,
+    });
+  }
+}
 async function deleteAll(req: Request, res: Response) {
   await UserService.deleteAll();
   res.status(201).json({
@@ -57,4 +89,11 @@ async function findAll(req: Request, res: Response) {
   });
 }
 
-export default { signup, deleteAll, deleteOne, login, findAll };
+export default {
+  signup,
+  deleteAll,
+  deleteOne,
+  login,
+  findAll,
+  logInWithGoogle,
+};

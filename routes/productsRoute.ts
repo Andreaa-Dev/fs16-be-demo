@@ -1,14 +1,13 @@
-import express from "express"
+import express from "express";
 
-import ProductController from "../controllers/productsController"
-import { validateProduct } from "../middlewares/productValidate"
+import ProductController from "../controllers/productsController";
+import { validateProduct } from "../middlewares/productValidate";
 
-const router = express.Router()
+const router = express.Router();
 
-router.get("/", ProductController.findAllProduct)
-router.get("/:productId", ProductController.findOneProduct)
-router.post("/", validateProduct, ProductController.createOneProduct)
+router.get("/", ProductController.findAllProduct);
+router.get("/:productId", ProductController.findOneProduct);
+router.post("/", validateProduct, ProductController.createOneProduct);
+router.delete("/:productId", ProductController.findOneProduct);
 
-router.delete("/:productId", ProductController.findOneProduct)
-
-export default router
+export default router;

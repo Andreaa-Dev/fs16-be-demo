@@ -1,6 +1,6 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: {
@@ -18,6 +18,10 @@ const UserSchema = new Schema({
     type: String,
     default: "USER",
   },
-})
+  isLogInWithGoogle: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-export default mongoose.model("User", UserSchema)
+export default mongoose.model("User", UserSchema);
