@@ -13,6 +13,7 @@ const OrderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  // embed
   orderItems: [
     {
       type: Schema.Types.ObjectId,
@@ -23,6 +24,7 @@ const OrderSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  // total
 });
 
 export default mongoose.model("Order", OrderSchema);

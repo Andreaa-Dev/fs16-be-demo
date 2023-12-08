@@ -22,6 +22,7 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  // ref to orderId
 });
 
 export default mongoose.model("User", UserSchema);

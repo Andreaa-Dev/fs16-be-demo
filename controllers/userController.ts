@@ -32,6 +32,7 @@ async function login(req: Request, res: Response) {
       .status(400)
       .json({ message: `Cant find user with email: ${email}` });
   }
+  // check if user register/log in with Google
   if (foundUser.isLogInWithGoogle) {
     return res.status(400).json({ message: "please log in with Google" });
   }

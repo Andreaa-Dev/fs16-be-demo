@@ -16,12 +16,14 @@ const Schema = mongoose.Schema;
 // });
 
 // new schema
+
 const OrderItemSchema = new Schema({
   productId: {
     type: Schema.Types.ObjectId,
     ref: "Product",
   },
   quantity: Number,
+  // orderId
 });
 
 export default mongoose.model("OrderItem", OrderItemSchema);
