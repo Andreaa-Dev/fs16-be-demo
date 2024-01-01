@@ -1,5 +1,5 @@
 name: backend-ci-cd
-on: [push, pull-request]
+on: [push, pull_request]
 push:
   branches: [main]
 
@@ -9,9 +9,9 @@ build:
   runs-on: ubuntu-latest
   steps:
     - name: Setup Node.js environment
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
-        node-version: "16.x"
+        node-version: "20.x"
 
     - name: Checkout code
       uses: actions/checkout@v2
@@ -30,9 +30,7 @@ build:
           ${{ runner.os }}-yarn-
 
     - name: Install dependencies
-      working-directory: ./api
       run: yarn install --frozen-lockfile
 
     - name: Integration test
-      working-directory: ./api
       run: yarn test
