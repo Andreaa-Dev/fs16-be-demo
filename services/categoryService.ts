@@ -8,6 +8,7 @@ async function findAll() {
 
 async function createOne(category: Category) {
   const newCategory = new CategoryRepo(category);
+  console.log("saving");
   return await newCategory.save();
 }
 

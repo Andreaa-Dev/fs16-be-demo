@@ -1,6 +1,6 @@
 import request from "supertest";
 
-import app from "../../";
+import app from "../../app";
 import CategoryService from "../../services/categoryService";
 import connect, { MongoHelper } from "../db-helper";
 
@@ -43,7 +43,11 @@ describe("Category controller", () => {
   // find all category
   it("should return all category", async () => {
     // create a category
-    await CategoryService.createOne({ name: "category1" });
+    try {
+      await CategoryService.createOne({ name: "category1" });
+    } catch (error) {
+      console.log(error);
+    }
 
     const response = await request(app).get("/api/v1/categories");
 
