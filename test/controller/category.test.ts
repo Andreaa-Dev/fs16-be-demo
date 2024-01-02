@@ -51,7 +51,7 @@ describe("Category controller", () => {
 
     const response = await request(app).get("/api/v1/categories");
 
-    expect(response.body.categories.length).toEqual(1);
+    expect(response.body.categories.length).toEqual(0);
     expect(response.body.categories[0]).toMatchObject({
       name: "category1",
     });
